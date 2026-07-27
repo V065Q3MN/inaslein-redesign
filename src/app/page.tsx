@@ -1,23 +1,35 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArtworkCanvas } from "@/components/ArtworkCanvas";
 import { MuseumLabel } from "@/components/MuseumLabel";
 import { PaletteMark } from "@/components/PaletteMark";
-import { CATEGORY_INFO } from "@/lib/artworks";
+import { CATEGORY_INFO, FEATURED_PIECE, HERO_IMAGE } from "@/lib/artworks";
 
-const CATEGORIES = ["portraits", "family", "animals"] as const;
+const TEASERS = [
+  { category: "portraits" as const, image: "/artwork/portraits/self-portrait.jpg" },
+  { category: "family" as const, image: "/artwork/family/schachtel-bakery.jpg" },
+  { category: "animals" as const, image: "/artwork/animals/img-0458.jpg" },
+];
 
 export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative">
-        <ArtworkCanvas seed="hero-mind-float" className="h-[70svh] min-h-[420px] w-full" />
+      <section className="relative h-[70svh] min-h-[420px] w-full">
+        <Image
+          src={HERO_IMAGE.image}
+          alt="Ina Slein artwork"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-transparent" />
         <div className="absolute inset-0 flex flex-col justify-end">
           <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 pb-10">
-            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl leading-[1.1] max-w-2xl">
+            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl leading-[1.1] max-w-2xl text-wall">
               Painted likenesses, held a little longer than a photograph.
             </h1>
-            <p className="label-caps text-xs sm:text-sm text-ink-soft mt-5">
+            <p className="label-caps text-xs sm:text-sm text-wall/80 mt-5">
               Portrait · Landscape · Still Life · Collage
             </p>
           </div>
@@ -27,11 +39,17 @@ export default function Home() {
       {/* Featured work / artist statement excerpt */}
       <section className="mx-auto max-w-6xl px-6 sm:px-10 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         <div>
-          <ArtworkCanvas seed="mind-float" className="aspect-[4/3] w-full" />
+          <Image
+            src={FEATURED_PIECE.image}
+            alt={FEATURED_PIECE.title}
+            width={FEATURED_PIECE.width}
+            height={FEATURED_PIECE.height}
+            className="w-full h-auto"
+          />
           <MuseumLabel
-            title="Mind Float"
-            medium="Acrylic on canvas"
-            dimensions="36 × 48 in."
+            title={FEATURED_PIECE.title}
+            medium={FEATURED_PIECE.medium}
+            dimensions={FEATURED_PIECE.dimensions}
             className="mt-4"
           />
         </div>
@@ -67,14 +85,19 @@ export default function Home() {
             <h2 className="label-caps text-xs text-ink-soft">The Galleries</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
-            {CATEGORIES.map((cat) => {
-              const info = CATEGORY_INFO[cat];
+            {TEASERS.map(({ category, image }) => {
+              const info = CATEGORY_INFO[category];
               return (
-                <Link key={cat} href={`/gallery/${cat}`} className="group block">
-                  <ArtworkCanvas
-                    seed={`teaser-${cat}`}
-                    className="aspect-[4/5] w-full"
-                  />
+                <Link key={category} href={`/gallery/${category}`} className="group block">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden">
+                    <Image
+                      src={image}
+                      alt={info.label}
+                      fill
+                      sizes="(min-width: 640px) 33vw, 100vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
                   <h3 className="font-display text-xl mt-4 group-hover:text-venetian transition-colors">
                     {info.label}
                   </h3>

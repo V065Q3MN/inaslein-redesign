@@ -22,23 +22,23 @@ Color tokens live in `src/app/globals.css` as CSS custom properties (`--wall`, `
 | `/gallery/in-progress` | In Progress (work still on the easel) |
 | `/contact` | Contact form (opens a pre-filled `mailto:`) + email/location |
 
-Bio and artist-statement copy on `/` and `/about` was pulled from the live site's real content. Everything else (gallery pieces, CTA copy) is placeholder pending real material from Ina.
+Bio and artist-statement copy on `/` and `/about` was pulled from the live site's real content.
 
-## Placeholder artwork
+## Artwork photos
 
-There are no real photographs of Ina's paintings yet. `src/components/ArtworkCanvas.tsx` renders a deterministic, muted gradient "underpainting" per piece (seeded by slug) so the layout reads as a real gallery instead of broken image boxes.
+All photos are real, pulled directly from the live inaslein.com (hosted on `img1.wsimg.com`/`isteam.wsimg.com`, GoDaddy's Website Builder image store) and saved locally under `public/artwork/`. `download-artwork.sh` is the exact script used to fetch them — re-run it (after updating the URL list) if Ina adds or replaces photos on the live site before this redesign ships.
 
-**Adding real artwork:**
-1. Drop photos into `public/artwork/`.
-2. Edit `src/lib/artworks.ts` — replace the placeholder `ARTWORKS` entries with real titles/medium/dimensions/year, and add an `image` field per piece.
-3. Swap `<ArtworkCanvas seed={...} />` for `<Image src={art.image} ... />` in `src/components/GalleryGrid.tsx` and wherever else it's used (`src/app/page.tsx`, `src/app/about/page.tsx`).
+Gallery pieces are listed in `src/lib/artworks.ts`, each with its real `width`/`height` (so `next/image` can lay them out without shift) and, where actually known, a `title`/`caption`/`medium`/`dimensions`/`year`. Most pieces only have a filename to go on, so they're labeled `"Untitled"` rather than inventing details — **do not guess at medium/size/year; get them from Ina and fill in `artworks.ts` directly.** The Family Portraits page carries real captions (the Schachtel family/bakery story, Newark NJ) pulled from the live site's image alt text.
+
+`GalleryGrid` (`src/components/GalleryGrid.tsx`) lays pieces out as a CSS-columns masonry so each photo keeps its true aspect ratio, since real paintings don't share one crop ratio the way the old placeholder tiles did.
 
 ## Next steps
 
-- Real photography for the four galleries (currently 2–4 placeholder entries each — likely needs far more for Portrait Gallery especially).
+- Get real title/medium/dimensions/year for the `"Untitled"` pieces in `src/lib/artworks.ts` from Ina.
 - Wire the contact form to a real backend (Formspree, Resend, etc.) instead of the `mailto:` fallback in `src/components/ContactForm.tsx`.
 - Confirm final copy for the home hero line and CTA band with Ina.
 - Decide on a domain/hosting move off GoDaddy (Vercel is the natural fit for a Next.js app).
+- Consider compressing/re-encoding `public/artwork/` (currently ~20MB of source JPEGs) for production.
 
 ## Development
 

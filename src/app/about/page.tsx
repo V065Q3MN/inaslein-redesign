@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { ArtworkCanvas } from "@/components/ArtworkCanvas";
+import Image from "next/image";
 import { MuseumLabel } from "@/components/MuseumLabel";
 import { PaletteMark } from "@/components/PaletteMark";
+import { FEATURED_PIECE } from "@/lib/artworks";
 
 export const metadata: Metadata = {
   title: "About | Ina Slein",
@@ -19,6 +20,15 @@ export default function AboutPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
         <div>
+          <div className="float-right ml-6 mb-4 w-32 sm:w-40">
+            <Image
+              src="/artwork/about/ina-portrait.jpg"
+              alt="Ina Slein"
+              width={1800}
+              height={2400}
+              className="w-full h-auto"
+            />
+          </div>
           <h2 className="font-display text-3xl sm:text-4xl leading-tight max-w-md">
             Trained in New York. Working in West Palm Beach.
           </h2>
@@ -52,11 +62,17 @@ export default function AboutPage() {
         </div>
 
         <div>
-          <ArtworkCanvas seed="mind-float" className="aspect-[4/3] w-full" />
+          <Image
+            src={FEATURED_PIECE.image}
+            alt={FEATURED_PIECE.title}
+            width={FEATURED_PIECE.width}
+            height={FEATURED_PIECE.height}
+            className="w-full h-auto"
+          />
           <MuseumLabel
-            title="Mind Float"
-            medium="Acrylic on canvas"
-            dimensions="36 × 48 in."
+            title={FEATURED_PIECE.title}
+            medium={FEATURED_PIECE.medium}
+            dimensions={FEATURED_PIECE.dimensions}
             className="mt-4"
           />
           <p className="text-ink-soft mt-6 leading-relaxed italic font-display text-lg">
