@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MuseumLabel } from "@/components/MuseumLabel";
 import { PaletteMark } from "@/components/PaletteMark";
 import { CATEGORY_INFO, FEATURED_PIECE, HERO_IMAGE } from "@/lib/artworks";
+import { withBasePath } from "@/lib/basePath";
 
 const TEASERS = [
   { category: "portraits" as const, image: "/artwork/portraits/self-portrait.jpg" },
@@ -16,7 +17,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative h-[70svh] min-h-[420px] w-full">
         <Image
-          src={HERO_IMAGE.image}
+          src={withBasePath(HERO_IMAGE.image)}
           alt="Ina Slein artwork"
           fill
           priority
@@ -40,7 +41,7 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 sm:px-10 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         <div>
           <Image
-            src={FEATURED_PIECE.image}
+            src={withBasePath(FEATURED_PIECE.image)}
             alt={FEATURED_PIECE.title ?? "Painting by Ina Slein"}
             width={FEATURED_PIECE.width}
             height={FEATURED_PIECE.height}
@@ -91,7 +92,7 @@ export default function Home() {
                 <Link key={category} href={`/gallery/${category}`} className="group block">
                   <div className="relative aspect-[4/5] w-full overflow-hidden">
                     <Image
-                      src={image}
+                      src={withBasePath(image)}
                       alt={info.label}
                       fill
                       sizes="(min-width: 640px) 33vw, 100vw"

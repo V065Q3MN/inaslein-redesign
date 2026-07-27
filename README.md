@@ -2,6 +2,14 @@
 
 A rebuild of [inaslein.com](https://inaslein.com) (currently a GoDaddy-builder site) in Next.js. Ina Slein is a portrait artist based in Lake Worth, FL, serving the Palm Beach area — painting commissioned portraits, family groups, and animal companions, and teaching private art instruction via Zoom.
 
+## Preview deploy
+
+Every push to `main` builds a static export and publishes it to GitHub Pages via `.github/workflows/deploy-pages.yml`:
+
+**https://v065q3mn.github.io/inaslein-redesign/**
+
+This is a preview/staging URL only, not the final production home. Because GitHub Pages serves plain static files with no Node server, the Pages build sets `output: "export"` and `images.unoptimized: true` in `next.config.ts` (only when the `GITHUB_PAGES` env var is set — local dev and any future custom-domain host are unaffected), and prefixes every asset path with `/inaslein-redesign` via `src/lib/basePath.ts`. None of that is needed once this moves to a real host (Vercel, or a custom domain) — at that point `next.config.ts` and the `withBasePath()` calls can be reverted to the plain paths.
+
 ## NAP / local SEO
 
 Confirmed business name/address/phone lives in one place: `src/lib/business.ts`. It feeds the visible footer/contact info, the site's title/meta description, and the `LocalBusiness` JSON-LD schema (`src/components/LocalBusinessSchema.tsx`, rendered in `layout.tsx`). The full street address is real but intentionally **not** shown as visible page text — this is a home studio, so the address is schema-only (for GBP verification), while the public site just shows the city. See `LOCAL-SEO-ANALYSIS-inaslein.com.md` for the full local-SEO audit this was based on.

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { MuseumLabel } from "@/components/MuseumLabel";
 import { PaletteMark } from "@/components/PaletteMark";
 import { FEATURED_PIECE } from "@/lib/artworks";
+import { withBasePath } from "@/lib/basePath";
 
 export const metadata: Metadata = {
   title: "About | Ina Slein",
@@ -22,7 +23,7 @@ export default function AboutPage() {
         <div>
           <div className="float-right ml-6 mb-4 w-32 sm:w-40">
             <Image
-              src="/artwork/about/ina-portrait.jpg"
+              src={withBasePath("/artwork/about/ina-portrait.jpg")}
               alt="Ina Slein"
               width={1800}
               height={2400}
@@ -63,7 +64,7 @@ export default function AboutPage() {
 
         <div>
           <Image
-            src={FEATURED_PIECE.image}
+            src={withBasePath(FEATURED_PIECE.image)}
             alt={FEATURED_PIECE.title ?? "Painting by Ina Slein"}
             width={FEATURED_PIECE.width}
             height={FEATURED_PIECE.height}

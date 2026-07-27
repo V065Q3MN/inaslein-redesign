@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { MuseumLabel } from "./MuseumLabel";
 import type { Artwork } from "@/lib/artworks";
+import { withBasePath } from "@/lib/basePath";
 
 export function GalleryGrid({ artworks }: { artworks: Artwork[] }) {
   return (
@@ -8,7 +9,7 @@ export function GalleryGrid({ artworks }: { artworks: Artwork[] }) {
       {artworks.map((art) => (
         <figure key={art.slug} className="break-inside-avoid">
           <Image
-            src={art.image}
+            src={withBasePath(art.image)}
             alt={art.caption ?? art.title ?? "Painting by Ina Slein"}
             width={art.width}
             height={art.height}
