@@ -64,7 +64,7 @@ export default function AboutPage() {
         <div>
           <Image
             src={FEATURED_PIECE.image}
-            alt={FEATURED_PIECE.title}
+            alt={FEATURED_PIECE.title ?? "Painting by Ina Slein"}
             width={FEATURED_PIECE.width}
             height={FEATURED_PIECE.height}
             className="w-full h-auto"

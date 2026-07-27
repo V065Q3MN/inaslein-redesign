@@ -9,21 +9,23 @@ export function GalleryGrid({ artworks }: { artworks: Artwork[] }) {
         <figure key={art.slug} className="break-inside-avoid">
           <Image
             src={art.image}
-            alt={art.caption ?? art.title}
+            alt={art.caption ?? art.title ?? "Painting by Ina Slein"}
             width={art.width}
             height={art.height}
             sizes="(min-width: 640px) 50vw, 100vw"
             className="w-full h-auto"
           />
-          <figcaption className="mt-4">
-            <MuseumLabel
-              title={art.title}
-              medium={art.medium}
-              dimensions={art.dimensions}
-              year={art.year}
-              caption={art.caption}
-            />
-          </figcaption>
+          {(art.title || art.caption || art.medium) && (
+            <figcaption className="mt-4">
+              <MuseumLabel
+                title={art.title}
+                medium={art.medium}
+                dimensions={art.dimensions}
+                year={art.year}
+                caption={art.caption}
+              />
+            </figcaption>
+          )}
         </figure>
       ))}
     </div>

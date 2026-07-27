@@ -6,7 +6,7 @@ export function MuseumLabel({
   caption,
   className = "",
 }: {
-  title: string;
+  title?: string;
   medium?: string;
   dimensions?: string;
   year?: string;
@@ -15,9 +15,11 @@ export function MuseumLabel({
 }) {
   const details = [medium, dimensions, year].filter(Boolean).join(" · ");
 
+  if (!title && !details && !caption) return null;
+
   return (
     <div className={className}>
-      <p className="font-display italic text-lg text-ink">{title}</p>
+      {title && <p className="font-display italic text-lg text-ink">{title}</p>}
       {details && (
         <p className="label-caps text-[0.65rem] text-ink-soft mt-1">
           {details}
