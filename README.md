@@ -1,6 +1,10 @@
 # Ina Slein — Site Redesign
 
-A rebuild of [inaslein.com](https://inaslein.com) (currently a GoDaddy-builder site) in Next.js. Ina Slein is a portrait artist in West Palm Beach, FL, painting commissioned portraits, family groups, and animal companions, and teaching private art instruction via Zoom.
+A rebuild of [inaslein.com](https://inaslein.com) (currently a GoDaddy-builder site) in Next.js. Ina Slein is a portrait artist based in Lake Worth, FL, serving the Palm Beach area — painting commissioned portraits, family groups, and animal companions, and teaching private art instruction via Zoom.
+
+## NAP / local SEO
+
+Confirmed business name/address/phone lives in one place: `src/lib/business.ts`. It feeds the visible footer/contact info, the site's title/meta description, and the `LocalBusiness` JSON-LD schema (`src/components/LocalBusinessSchema.tsx`, rendered in `layout.tsx`). The full street address is real but intentionally **not** shown as visible page text — this is a home studio, so the address is schema-only (for GBP verification), while the public site just shows the city. See `LOCAL-SEO-ANALYSIS-inaslein.com.md` for the full local-SEO audit this was based on.
 
 ## Design direction
 

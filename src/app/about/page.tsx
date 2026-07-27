@@ -30,7 +30,7 @@ export default function AboutPage() {
             />
           </div>
           <h2 className="font-display text-3xl sm:text-4xl leading-tight max-w-md">
-            Trained in New York. Working in West Palm Beach.
+            Trained in New York. Working in Lake Worth, Florida.
           </h2>
           <div className="mt-8 space-y-5 text-ink-soft leading-relaxed max-w-md">
             <p>

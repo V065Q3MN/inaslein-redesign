@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { PaletteMark } from "@/components/PaletteMark";
+import { BUSINESS } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "Contact | Ina Slein",
@@ -19,8 +20,9 @@ export default function ContactPage() {
         Let&rsquo;s talk about a portrait, or a lesson.
       </h2>
       <p className="text-ink-soft max-w-md mb-12 leading-relaxed">
-        Based in West Palm Beach, Florida. Portrait commissions and private
-        instruction are available in person or by video call.
+        Based in {BUSINESS.cityDisplay}, serving the Palm Beach area.
+        Portrait commissions and private instruction are available in
+        person or by video call.
       </p>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
@@ -28,23 +30,32 @@ export default function ContactPage() {
 
         <div className="label-caps text-xs text-ink-soft space-y-6">
           <div>
-            <p className="text-ink mb-1">Email</p>
+            <p className="text-ink mb-1">Phone</p>
             <a
-              href="mailto:info@inaslein.com"
+              href={`tel:${BUSINESS.telephone}`}
               className="normal-case tracking-normal text-ink-soft hover:text-venetian transition-colors"
             >
-              info@inaslein.com
+              {BUSINESS.telephoneDisplay}
+            </a>
+          </div>
+          <div>
+            <p className="text-ink mb-1">Email</p>
+            <a
+              href={`mailto:${BUSINESS.email}`}
+              className="normal-case tracking-normal text-ink-soft hover:text-venetian transition-colors"
+            >
+              {BUSINESS.email}
             </a>
           </div>
           <div>
             <p className="text-ink mb-1">Location</p>
             <a
-              href="https://www.google.com/maps/search/?api=1&query=West+Palm+Beach+FL"
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(BUSINESS.city + " " + BUSINESS.state)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="normal-case tracking-normal text-ink-soft hover:text-venetian transition-colors"
             >
-              West Palm Beach, Florida — Get directions
+              {BUSINESS.cityDisplay} — Get directions
             </a>
           </div>
         </div>

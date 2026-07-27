@@ -1,4 +1,5 @@
 import { PaletteMark } from "./PaletteMark";
+import { BUSINESS } from "@/lib/business";
 
 export function SiteFooter() {
   return (
@@ -6,19 +7,25 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl px-6 sm:px-10 py-14 flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-center gap-3">
           <PaletteMark size={18} />
-          <span className="font-display text-lg">Ina Slein</span>
+          <span className="font-display text-lg">{BUSINESS.name}</span>
         </div>
 
         <div className="label-caps text-[0.7rem] text-ink-soft space-y-2">
-          <p>West Palm Beach, Florida</p>
+          <p>{BUSINESS.cityDisplay}</p>
           <a
-            href="mailto:info@inaslein.com"
+            href={`tel:${BUSINESS.telephone}`}
             className="block hover:text-venetian transition-colors"
           >
-            info@inaslein.com
+            {BUSINESS.telephoneDisplay}
           </a>
           <a
-            href="https://www.google.com/maps/search/?api=1&query=West+Palm+Beach+FL"
+            href={`mailto:${BUSINESS.email}`}
+            className="block hover:text-venetian transition-colors"
+          >
+            {BUSINESS.email}
+          </a>
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(BUSINESS.city + " " + BUSINESS.state)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="block hover:text-venetian transition-colors"
